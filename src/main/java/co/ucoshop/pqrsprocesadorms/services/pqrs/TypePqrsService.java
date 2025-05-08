@@ -1,7 +1,9 @@
 package co.ucoshop.pqrsprocesadorms.services.pqrs;
 
-import co.ucoshop.ucoshopapi.domain.pqrs.TypePqrs;
-import co.ucoshop.ucoshopapi.repositories.pqrs.ITypePqrsRepository;
+
+
+import co.ucoshop.pqrsprocesadorms.domain.pqrs.TypePqrs;
+import co.ucoshop.pqrsprocesadorms.repositories.pqrs.ITypePqrsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

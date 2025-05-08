@@ -1,7 +1,8 @@
 package co.ucoshop.pqrsprocesadorms.domain.pqrs;
 
-import co.ucoshop.ucoshopapi.domain.faq.FaqProcess;
-import co.ucoshop.ucoshopapi.domain.faq.Functionality;
+
+import co.ucoshop.pqrsprocesadorms.domain.faq.FaqProcess;
+import co.ucoshop.pqrsprocesadorms.domain.faq.Functionality;
 import jakarta.persistence.*;
 import lombok.Data;
 
