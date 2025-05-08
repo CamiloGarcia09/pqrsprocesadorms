@@ -1,8 +1,10 @@
 package co.ucoshop.pqrsprocesadorms.services.pqrs;
 
-import co.ucoshop.ucoshopapi.domain.pqrs.Note;
-import co.ucoshop.ucoshopapi.domain.pqrs.Pqrs;
-import co.ucoshop.ucoshopapi.repositories.pqrs.IPqrsRepository;
+
+
+import co.ucoshop.pqrsprocesadorms.domain.pqrs.Note;
+import co.ucoshop.pqrsprocesadorms.domain.pqrs.Pqrs;
+import co.ucoshop.pqrsprocesadorms.repositories.pqrs.IPqrsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

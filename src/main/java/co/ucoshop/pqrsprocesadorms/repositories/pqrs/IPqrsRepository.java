@@ -1,6 +1,7 @@
 package co.ucoshop.pqrsprocesadorms.repositories.pqrs;
 
-import co.ucoshop.ucoshopapi.domain.pqrs.Pqrs;
+
+import co.ucoshop.pqrsprocesadorms.domain.pqrs.Pqrs;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
