@@ -2,15 +2,16 @@ package co.ucoshop.pqrsprocesadorms.util.gson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.*;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-public class MapperJsonObjetoJackson implements MapperJsonObjeto{
-
+@Component
+public class MapperJsonObjetoJackson implements MapperJsonObjeto {
 
     @Override
     public Optional<String> ejecutar(Object objeto) {
@@ -20,8 +21,6 @@ public class MapperJsonObjetoJackson implements MapperJsonObjeto{
             return Optional.ofNullable(objectMapper.writeValueAsString(objeto));
         } catch (JsonProcessingException e) {
             return Optional.empty();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
