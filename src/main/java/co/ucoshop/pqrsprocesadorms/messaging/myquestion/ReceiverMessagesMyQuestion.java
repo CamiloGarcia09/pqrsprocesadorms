@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class ReceiverMessagesMyQuestion {
@@ -20,7 +21,22 @@ public class ReceiverMessagesMyQuestion {
         this.mapperJsonObjeto = mapperJsonObjeto;
     }
 
-    @RabbitListener(queues = "${mensaje.myquestion.crear.queue-name}")
+    @RabbitListener(queues = "${procesadorpqrs.mispreguntas.actualizar-qn}")
+    public void receiveMessageUpdateMyQuestion(String message) {
+        try {
+            Optional<MyQuestion> question = obtenerObjetoDeMensaje(message);
+            if (question.isPresent()) {
+                UUID id = question.get().getId();
+                myQuestionService.updateMyQuestion(id, question.get());
+            }
+            System.out.println(message);
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+    }
+
+    @RabbitListener(queues = "${procesadorpqrs.mispreguntas.crear-qn}")
     public void receiveMessageCreateMyQuestion(String message) {
         try {
             obtenerObjetoDeMensaje(message)
