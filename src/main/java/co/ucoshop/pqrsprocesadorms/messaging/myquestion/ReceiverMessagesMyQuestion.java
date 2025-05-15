@@ -22,13 +22,25 @@ public class ReceiverMessagesMyQuestion {
     }
 
     @RabbitListener(queues = "${procesadorpqrs.mispreguntas.actualizar-qn}")
-    public void receiveMessageCreateMyQuestion(String message) {
+    public void receiveMessageUpdateMyQuestion(String message) {
         try {
             Optional<MyQuestion> question = obtenerObjetoDeMensaje(message);
             if (question.isPresent()) {
                 UUID id = question.get().getId();
                 myQuestionService.updateMyQuestion(id, question.get());
             }
+            System.out.println(message);
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+    }
+
+    @RabbitListener(queues = "${procesadorpqrs.mispreguntas.crear-qn}")
+    public void receiveMessageCreateMyQuestion(String message) {
+        try {
+            obtenerObjetoDeMensaje(message)
+                    .ifPresent(myquestion -> myQuestionService.saveMyQuestion(myquestion));
             System.out.println(message);
         } catch (Exception e) {
             System.out.println(e);
