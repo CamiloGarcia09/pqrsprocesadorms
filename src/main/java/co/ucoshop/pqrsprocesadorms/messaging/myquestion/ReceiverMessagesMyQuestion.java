@@ -22,6 +22,18 @@ public class ReceiverMessagesMyQuestion {
         this.mapperJsonObjeto = mapperJsonObjeto;
     }
 
+    @RabbitListener(queues = "${procesadorpqrs.mispreguntas.crear-qn}")
+    public void receiveMessageCreateMyQuestion(String message) {
+        try {
+            obtenerObjetoDeMensaje(message)
+                    .ifPresent(myQuestionService::saveMyQuestion);
+            System.out.println(message);
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+    }
+
     @RabbitListener(queues = "${procesadorpqrs.mispreguntas.actualizar-qn}")
     public void receiveMessageUpdateMyQuestion(String message) {
         try {
