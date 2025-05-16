@@ -24,7 +24,7 @@ public class MyQuestionsConfig {
     private String corregirEx;
     private String corregirRk;
 
-    private String respuestaActualizarQn;
-    private String respuestaActualizarEx;
-    private String respuestaActualizarRk;
+    private String borrarQn;
+    private String borrarEx;
+    private String borrarRk;
 }
