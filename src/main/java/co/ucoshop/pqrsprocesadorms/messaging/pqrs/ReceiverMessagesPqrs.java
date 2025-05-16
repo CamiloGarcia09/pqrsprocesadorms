@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class ReceiverMessagesPqrs {
@@ -19,7 +20,7 @@ public class ReceiverMessagesPqrs {
         this.mapperJsonObjeto = mapperJsonObjeto;
     }
 
-    @RabbitListener(queues = "${mensaje.pqrs.crear.queue-name}")
+    @RabbitListener(queues = "${procesadorpqrs.pqrs.crear-qn}")
     public void receiveMessageCreatePqrs(String message) {
         try {
             obtenerObjetoDeMensaje(message)
@@ -32,5 +33,16 @@ public class ReceiverMessagesPqrs {
     }
     private Optional<Pqrs> obtenerObjetoDeMensaje(String mensaje) {
         return mapperJsonObjeto.ejecutar(mensaje, Pqrs.class);
+    }
+
+    @RabbitListener(queues = "${procesadorpqrs.pqrs.delete-qn}")
+    public void receiveMessageDeletePqrs(String message) {
+        try {
+            UUID idPqrs = UUID.fromString(message.trim());
+            pqrsService.deletePqrs(idPqrs);
+            System.out.println(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

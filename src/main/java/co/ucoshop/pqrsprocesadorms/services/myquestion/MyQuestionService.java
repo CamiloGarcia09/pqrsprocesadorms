@@ -59,8 +59,8 @@ public class MyQuestionService {
         myQuestionRepository.save(myQuestion);
     }
 
-    public MyQuestion updateMyQuestion(UUID id, MyQuestion updatedQuestion) {
-        return myQuestionRepository.findById(id)
+    public void updateMyQuestion(UUID id, MyQuestion updatedQuestion) {
+        myQuestionRepository.findById(id)
                 .map(existingQuestion -> {
                     UUID processId = updatedQuestion.getProcess().getId();
                     UUID functionalityId = updatedQuestion.getFunctionality().getId();
