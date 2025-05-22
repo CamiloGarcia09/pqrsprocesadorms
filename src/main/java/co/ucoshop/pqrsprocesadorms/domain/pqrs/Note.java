@@ -34,4 +34,37 @@ public class Note {
         setPqrs(pqrs);
         setCreatedAt(createdAt);
     }
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public Pqrs getPqrs() {
+        return pqrs;
+    }
+
+    public void setPqrs(Pqrs pqrs) {
+        this.pqrs = pqrs;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+
 }
