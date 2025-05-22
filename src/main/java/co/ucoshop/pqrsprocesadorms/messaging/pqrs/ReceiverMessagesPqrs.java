@@ -17,14 +17,10 @@ public class ReceiverMessagesPqrs {
     private final PqrsService pqrsService;
     private final MapperJsonObjeto mapperJsonObjeto;
 
-
-
     public ReceiverMessagesPqrs(PqrsService pqrsService, MapperJsonObjeto mapperJsonObjeto) {
         this.pqrsService = pqrsService;
         this.mapperJsonObjeto = mapperJsonObjeto;
     }
-
-
 
     @RabbitListener(queues = "${procesadorpqrs.pqrs.crear-qn}")
     public void receiveMessageCreatePqrs(String message) {
@@ -37,7 +33,9 @@ public class ReceiverMessagesPqrs {
 
         }
     }
-
+    private Optional<Pqrs> obtenerObjetoDeMensaje(String mensaje) {
+        return mapperJsonObjeto.ejecutar(mensaje, Pqrs.class);
+    }
 
     @RabbitListener(queues = "${procesadorpqrs.pqrs.delete-qn}")
     public void receiveMessageDeletePqrs(String message) {
@@ -81,9 +79,5 @@ public class ReceiverMessagesPqrs {
             e.printStackTrace();
             return "";
         }
-    }
-
-    private Optional<Pqrs> obtenerObjetoDeMensaje(String mensaje) {
-        return mapperJsonObjeto.ejecutar(mensaje, Pqrs.class);
     }
 }
