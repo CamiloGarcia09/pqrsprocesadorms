@@ -25,8 +25,8 @@ public class ReceiverMessagesPqrs {
     }
 
 
-    /*
-    @RabbitListener(queues = "${mensaje.pqrs.crear.queue-name}")
+
+    @RabbitListener(queues = "${procesadorpqrs.pqrs.crear-qn}")
     public void receiveMessageCreatePqrs(String message) {
         try {
             obtenerObjetoDeMensaje(message)
@@ -37,7 +37,19 @@ public class ReceiverMessagesPqrs {
 
         }
     }
-    */
+
+
+    @RabbitListener(queues = "${procesadorpqrs.pqrs.delete-qn}")
+    public void receiveMessageDeletePqrs(String message) {
+        try {
+            UUID idPqrs = UUID.fromString(message.trim());
+            pqrsService.deletePqrs(idPqrs);
+            System.out.println(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     @RabbitListener(queues = "${procesadorpqrs.consultarestado.agregarmensaje-qn}")
     public void receiveMessageAddMessagePqrs(String message) {
