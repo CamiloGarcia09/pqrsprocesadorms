@@ -49,7 +49,7 @@ public class ReceiverMessagesPqrs {
     }
 
 
-    @RabbitListener(queues = "${procesadorpqrs.consultarestado.agregarmensaje-qn}")
+    @RabbitListener(queues = "${procesadorpqrs.pqrs.agregarmensaje-qn}")
     public void receiveMessageAddMessagePqrs(String message) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

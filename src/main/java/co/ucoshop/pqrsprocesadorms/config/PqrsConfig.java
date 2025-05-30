@@ -18,4 +18,9 @@ public class PqrsConfig {
     private String deleteQn;
     private String deleteEx;
     private String deleteRk;
+
+
+    private String addmessageQn;
+    private String addmessageEx;
+    private String addmessageRk;
 }
