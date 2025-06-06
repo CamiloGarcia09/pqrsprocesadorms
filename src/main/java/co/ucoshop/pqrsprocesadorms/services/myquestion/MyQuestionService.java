@@ -13,10 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class MyQuestionService {
@@ -89,6 +86,10 @@ public class MyQuestionService {
     public void updateMyQuestionByParams(UUID id, Map<String, Object> data) {
         MyQuestion myQuestion = myQuestionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No se encontró la pregunta con ID " + id));
+
+        if (!Objects.equals(myQuestion.getAnswer(), "")) {
+            throw new IllegalArgumentException("La pregunta con ID " + id + " ya esta respondida");
+        }
 
         try {
             objectMapper.updateValue(myQuestion, data);
