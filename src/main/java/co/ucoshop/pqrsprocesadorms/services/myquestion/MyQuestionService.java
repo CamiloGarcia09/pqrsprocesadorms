@@ -59,6 +59,11 @@ public class MyQuestionService {
     public void updateMyQuestion(UUID id, MyQuestion updatedQuestion) {
         myQuestionRepository.findById(id)
                 .map(existingQuestion -> {
+
+                    if (existingQuestion.getAnswer() != null && !existingQuestion.getAnswer().isEmpty()) {
+                        throw new IllegalArgumentException("La pregunta con ID " + id + " ya esta respondida");
+                    }
+
                     UUID processId = updatedQuestion.getProcess().getId();
                     UUID functionalityId = updatedQuestion.getFunctionality().getId();
 
