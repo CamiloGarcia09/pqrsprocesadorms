@@ -1,6 +1,7 @@
 package co.ucoshop.pqrsprocesadorms.messaging.pqrs;
 
 import co.ucoshop.pqrsprocesadorms.domain.pqrs.Pqrs;
+import co.ucoshop.pqrsprocesadorms.domain.pqrs.PqrsNoteMessage;
 import co.ucoshop.pqrsprocesadorms.services.pqrs.PqrsService;
 import co.ucoshop.pqrsprocesadorms.util.gson.MapperJsonObjeto;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -53,16 +54,16 @@ public class ReceiverMessagesPqrs {
     public void receiveMessageAddMessagePqrs(String message) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode node = objectMapper.readTree(message);
+            PqrsNoteMessage dto = objectMapper.readValue(message, PqrsNoteMessage.class);
 
-            String contenidoNota = node.get("mensaje").asText();
-            UUID idPqrs = UUID.fromString(node.get("id_pqrs").asText());
+            Optional<Pqrs> optionalPqrs = pqrsService.findById(dto.getIdPqrs());
 
-            Optional<Pqrs> optionalPqrs = pqrsService.findById(idPqrs);
-
-            optionalPqrs.ifPresent(pqrs -> {
-                pqrsService.addNoteToPqrs(pqrs, contenidoNota);
-            });
+            if (optionalPqrs.isPresent()) {
+                Pqrs pqrs = optionalPqrs.get();
+                pqrsService.addNoteToPqrs(pqrs, dto.getMensaje());
+            } else {
+                System.err.println("PQRS no encontrada con id: " + dto.getIdPqrs());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
