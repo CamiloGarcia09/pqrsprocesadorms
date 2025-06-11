@@ -41,9 +41,9 @@ public class ReceiverMessagesPqrs {
     @RabbitListener(queues = "${procesadorpqrs.pqrs.delete-qn}")
     public void receiveMessageDeletePqrs(String message) {
         try {
-            UUID idPqrs = UUID.fromString(message.trim());
-            pqrsService.deletePqrs(idPqrs);
-            System.out.println(message);
+            obtenerObjetoDeMensaje(message)
+                    .ifPresent(pqrs -> pqrsService.deletePqrs(pqrs.getId()));
+            System.out.println("MEnsaje " + message);
         } catch (Exception e) {
             System.out.println(e);
         }
