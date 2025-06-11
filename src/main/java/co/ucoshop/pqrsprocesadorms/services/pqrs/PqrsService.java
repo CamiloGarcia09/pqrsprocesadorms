@@ -27,15 +27,14 @@ public class PqrsService {
     }
 
     public Pqrs savePqrs(Pqrs pqrs) {
-        if (pqrs.getId() == null) {
-            pqrs.setId(UUID.randomUUID());
-            pqrs.setCreatedAt(LocalDateTime.now());
-        }
+        pqrs.setCreatedAt(LocalDateTime.now());
+
         return ipqrsRepository.save(pqrs);
     }
 
     public void deletePqrs(UUID idpqrs) {
         ipqrsRepository.deleteById(idpqrs);
+        System.out.println("Producto a elimar " + idpqrs);
     }
 
     public Optional<Pqrs> findById(UUID idpqrs) {
